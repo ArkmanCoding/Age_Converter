@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<meta name="theme-color" content="#EDE9E0" />
+<meta name="description" content="تبدیل‌گر گروه سنی — یک ابزار ساده، طراحی‌شده با دقت." />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Age Tool" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="mobile-web-app-capable" content="yes" />
+<title>Age Tool — Arkman</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       نوار بالا — برند + نسخه
+       برند تریگر مودال سازنده است
+       ═══════════════════════════════════════════════════════════ -->
+  <header class="app-bar">
+    <a href="#creator-modal" class="app-brand no-select" aria-label="اطلاعات سازنده">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span class="brand-text">
+        <span class="brand-name">Arkman</span>
+        <span class="brand-tag">Age Tool</span>
+      </span>
+    </a>
+    <span class="app-version" aria-label="نسخه ۱.۴.۰">v1.4.0</span>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       محتوای اصلی
+       ═══════════════════════════════════════════════════════════ -->
+  <main class="app-main">
+
+    <section class="hero" aria-labelledby="heroTitle">
+      <h1 class="hero-title" id="heroTitle">
+        <span class="hero-title__line">تبدیل‌گر</span>
+        <span class="hero-title__accent">گروه سنی</span>
+      </h1>
+      <p class="hero-lede">
+        یک عدد وارد کنید تا در یک نگاه، جایگاه آن را در طیف سنی ببینید.
+      </p>
+    </section>
+
+    <div class="field">
+      <label class="field-label" for="ageInput">
+        <span>سن</span>
+        <span class="field-hint">۱ تا ۱۲۰</span>
+      </label>
+
+      <div class="field-shell">
+        <input
+          id="ageInput"
+          type="number"
+          inputmode="numeric"
+          min="1"
+          max="120"
+          step="1"
+          required
+          placeholder="مثلاً ۲۷"
+          autocomplete="off"
+          spellcheck="false"
+          aria-describedby="ageHelp"
+        />
+        <span class="field-unit" aria-hidden="true">سال</span>
+      </div>
+
+      <span id="ageHelp" class="visually-hidden">
+        عدد سن را بین ۱ تا ۱۲۰ وارد کنید و سپس دکمه تحلیل را بزنید.
+      </span>
+    </div>
+
+    <button id="checkBtn" class="action-btn" type="button">
+      <span class="btn-label">تحلیل سن</span>
+      <svg class="btn-arrow" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.2"
+           stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true" focusable="false">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+    </button>
+
+    <!-- نتیجه — متعلق به JS فریزشده -->
+    <section
+      id="result"
+      class="result-section is-hidden"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       پانوشت
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="app-footer">
+    <div class="footer-meta">
+      <span>v1.4.0</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>۱۴۰۳/۰۸/۲۱</span>
+    </div>
+    <div class="footer-hint" aria-hidden="true">
+      <kbd>Enter</kbd>
+      <span>تحلیل</span>
+      <span class="sep">·</span>
+      <kbd>Esc</kbd>
+      <span>بستن</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     مودال سازنده — CSS خالص، :target
+     روی موبایل: Bottom Sheet سه‌بعدی
+     روی دسکتاپ: کارت با پرسپکتیو
+     ═══════════════════════════════════════════════════════════════ -->
+<div
+  id="creator-modal"
+  class="modal-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="creatorModalTitle"
+>
+  <a href="#" class="modal-backdrop" aria-label="بستن پنجره" tabindex="-1"></a>
+
+  <div class="modal-panel">
+
+    <span class="modal-handle" aria-hidden="true"></span>
+
+    <!-- بستن اول می‌آید برای دسترسی کیبورد -->
+    <a href="#" class="modal-close" aria-label="بستن">&times;</a>
+
+    <div class="modal-avatar" aria-hidden="true">A</div>
+
+    <h2 class="modal-title" id="creatorModalTitle">Arkman</h2>
+
+    <p class="modal-role">مهندس هوش مصنوعی · طراح و توسعه‌دهنده وب</p>
+
+    <div class="modal-divider" role="presentation"></div>
+
+    <p class="modal-bio">
+      روی رابط‌هایی کار می‌کنم که در سکوت کار می‌کنند: بدون شلوغی،
+      بدون افکت‌های بی‌دلیل، با تایپوگرافی دقیق و فاصله‌های حساب‌شده.
+      این ابزار هم یکی از همان تمرین‌هاست — یک صفحه، یک کار، و تا
+      جای ممکن، کم‌ترین اصطکاک.
+    </p>
+
+    <ul class="modal-links">
+      <li>
+        <a href="https://github.com/ArkmanCoding" target="_blank" rel="noopener noreferrer">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.26 5.69.42.36.79 1.08.79 2.18v3.23c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
+          </svg>
+          <span class="link-text">github.com/ArkmanCoding</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="mailto:arkman.coding@gmail.com">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true" focusable="false">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <polyline points="3 7 12 13 21 7"></polyline>
+          </svg>
+          <span class="link-text is-fa">ارسال ایمیل</span>
+        </a>
+      </li>
+    </ul>
+
+    <a href="#" class="modal-cta">بستن</a>
+
+  </div>
+</div>
+
+<!-- جاوااسکریپت فریزشده — دست‌نخورده -->
+<script src="script.js"></script>
+
+</body>
+</html>
